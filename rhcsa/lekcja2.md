@@ -113,9 +113,9 @@ chmod 1755 plik
 - - - -
 # Scripts and automation
 ## BASH
-```
+
 [Skrypty przygotowane do przejrzenia](https://github.com/mariano-italiano/public-repo/tree/master/rhcsa/scripts)
-```
+
 ## SHELL
 ```
 for i in user1 user2 user3; do id $i; done 
