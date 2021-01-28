@@ -132,3 +132,195 @@ X=0 ; while [ true ] ; do echo $X ; X=$((X+1)) ; done | head
 X=0 ; while [ $X -le 5 ] ; do echo $((X++)) ; done
 X=0 ; until [ $X -eq 5 ] ; do echo $((++X)) ; done
 ```
+
+# Manage users and groups
+## Create, delete, and modify local user accounts
+**Uid, Gid****
+
+Każdy użytkownik w systemie posiada unikalny identyfikator UID, a grupa identyfikator grupy GID, które są konieczne do autoryzacji użytkownika czy grupy w systemie i przydziale praw dostępu. Konta użytkowników są zdefiniowane w plikach: /etc/passwd, /etc/shadow, natomiast grup w pliku /etc/group. Każdy użytkownik należy do pewnej grupy podstawowej, np. users. Oczywiście może należeć do innych grup ( grupy suplementarne) jeśli administrator da mu takie prawo.
+
+Super użytkownikiem czyli administratorem systemu jest ROOT. Jest to krytyczne konto w systemie, dlatego należy chronić do niego dostęp, nie udostępniać hasła czy też nie wykorzystywać prostych haseł, łatwych do odkrycia przez np. ataki słownikowe.
+
+Polecenia dla części praktycznej: 
+```
+id
+finger
+su
+su – user
+su – root
+```
+
+**Katalog domowy**
+
+W czasie logowania użytkownika program /bin/login zmienia bieżący katalog na katalog domowy użytkownika, zmienia UID i GID, ostatecznie uruchamia shell zgłoszony (czyli powłokę systemową np. program /bin/bash).
+Katalogi domowe użytkowników w systemie Linux znajdują się najczęściej w katalogu /home i posiadają nazwę taką jak login. Oczywiście katalog domowy może znajdować się w innym miejscu drzewa katalogowego, np. dla konta FTP obsługującego serwis WWW może to być podkatalog w /var/www.
+Szczegółowe informacje o użytkowniku znajdujemy w pliku **/etc/passwd**, lub za pomocą poleceń **id, finger**.
+
+Każdy użytkownik logujący się w systemie Linux jest identyfikowany w oparciu o konto użytkownika. Konto takie kontroluje dostęp do systemu, definiując nazwę użytkownika i hasło, które uwierzytelnia go podczas procesu logowania. Do kontroli przywilejów zalogowanego użytkownika wykorzystywane są identyfikator użytkownika – UID i identyfikator grupy – GID, odpowiadające danemu kontu. Wartości te, zdefiniowane podczas tworzenia konta użytkownika, kontrolują bezpieczeństwo systemu plików i identyfikują, który użytkownik kontroluje dany proces.
+
+**Format pliku /etc/passwd**
+
+root:x:0:0:root:/root:/bin/bash	# administrator systemu, użytkownik o UID=0, GID=0
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh
+sync:x:4:100:sync:/bin:/bin/sync
+games:x:5:100:games:/usr/games:/bin/sh
+man:x:6:100:man:/var/cache/man:/bin/sh
+lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+mail:x:8:8:mail:/var/spool/mail:/bin/sh
+postgres:x:31:32:postgres:/var/lib/postgres:/bin/sh
+www-data:x:33:33:www-data:/var/www:/bin/sh
+backup:x:34:34:backup:/var/backups:/bin/sh
+msql:x:36:36:Mini SQL Database Manager:/var/lib/msql:/bin/sh
+nobody:x:65534:65534:nobody:/home:/bin/sh
+user1:x:1000:100:Uzytkownik user1,,,:/home/user1:/bin/bash	# przykład zwykłego użytkownika
+user2:x:1001:100:Uzytkownik user2,,,:/home/user2:/usr/bin/passwd
+
+czyli:
+
+**użytkownik:hasło:UID:GID:tekst_info:katalog_domowy:shell** , gdzie:
+
+
+użytkownik - jest nazwą konta,
+hasło – jest zaszyfrowanym hasłem użytkownika, w powyższym przykładzie nie ma wpisanego hasła, gdyż znajduje się ono w pliku haseł ukrytych shadow password (plik /etc/shadow),
+UID – jest numerem ID użytkownika dla danego konta,
+GID – jest numerem ID grupy dla grupy podstawowej danego użytkownika,
+tekst_info – jest dowolną informacją tekstową o użytkowniku, np. imię i nazwisko,
+katalog_domowy – jest katalogiem domowym użytkownika,
+shell – jest powłoką logowania dla użytkownika, np. bash, sh, csh itp. Dostępne powłoki należy zdefiniować w pliku /etc/shells.
+
+Plik haseł ukrytych /etc/shadow może być czytany tylko przez administratora. Nie przyznaje się praw dostępu dla grup, ani innych użytkowników. Został on zaprojektowany, aby normalni użytkownicy nie mogli czytać zaszyfrowanych haseł i wystawiać je na atak słownikowy. Oprócz poprawy bezpieczeństwa haseł, plik /etc/shadow dostarcza administratorom systemu kilku innych cech związanych z zarządzaniem hasłami.
+
+**Format pliku /etc/shadow**
+ 
+
+list:*:11501:0:99999:7:::
+ 
+- konto systemowe, nie można się zalogować, brak powłoki (*)
+
+irc:*:11501:0:99999:7:::
+gnats:*:11501:0:99999:7:::
+nobody:*:11501:0:99999:7:::
+sshd:!:11863:0:99999:7:::
+ 
+
+- konto zablokowane, posiada poprawną powłokę logowania (!)
+ 
+netsaint:!:11939:0:99999:7:::
+test:$1$B/cfDxoK$yJUyNWS9iRwnGpqlLqf8c/:11998:0:99999:7:::
+
+czyli:
+
+**nazwa_użytkownika:hasło:zmienione:min:max:ostrzeżenie:nieaktywne:zamknięte:zarezerwowane** , gdzie:
+
+nazwa_użytkownika – jest nazwą konta (login),
+hasło – jest zaszyfrowanym hasłem,
+last change (zmienione) – jest datą, kiedy hasło było ostatni raz zmieniane, data jest zapisana jako liczba dni od 1 stycznia 1970 roku od daty zmiany,
+min password age – jest minimalna liczbą dni, kiedy użytkownik musi stosować nowe hasło, zanim będzie mógł je zmienić, 0 - brak limitu
+max password age – jest maksymalną liczbą dni, kiedy użytkownik może stosować hasło, zanim będzie musiał je zmienić,
+warn period (ostrzeżenie) – definiuje na ile dni przed upływem ważności hasła użytkownika zostanie ostrzeżony, 0 – brak limitu
+inactive period (nieaktywne) – definiuje, ile dni musi minąć po wygaśnięciu ważności hasła, zanim konto zostanie zablokowane. Gdy konto zostaje zablokowane, użytkownik nie może zalogować się i zmienić hasła,
+zamknięte – jest datą kiedy konto zostanie zamknięte,
+zarezerwowane – pole zarezerwowane.
+
+**Tworzenie i usuwanie uzytkowników**
+```
+adduser
+useradd -g users -G ftp -d /home/test -s /bin/bash -c "Imie i Nazwisko" test
+userdel –r test
+```
+Blokowanie i odblokowanie konta użytkownika:
+```
+passwd –l test 
+passwd –u test
+```
+Zmiana parametrów konta:
+```
+usermod –g users –G ftp,grupa1,grupa2  test
+```
+Zmiana  powłoki:
+```
+chsh
+```
+Zmiana informacji o koncie:
+```
+chfn
+```
+Tworzenie i usuwanie nowej grupy: 
+```
+groupadd grupa 
+groupdel grupa
+```
+Zmiana parametrów grupy:
+```
+groupmod –g nowy_gid –n nowa_nazwa grupa
+```
+
+
+
+## Change passwords and adjust password aging for local user accounts
+
+Zmiana hasła odbywa się poprzez polecenie:
+```
+passwd <user>
+```
+
+
+
+
+
+
+Wymuszenie zmiany hasła za 10 dni:
+```
+chage -M 10 <username>
+```
+Ustawienie daty na koncie kiedy ma być expired:
+```
+chage -E "2011-01-31" <username>
+```
+Wymuszenie aby konto było zablokowane po 10 dniach nieaktywności:
+```
+chage -I 10 <username>
+```
+Wyłaczenie agingu dla konta - never expires:
+```
+chage -m 0 -M 99999 -I -1 -E -1 <username>
+```
+Wylistowanie informacji o koncie:
+```
+chage -l
+```
+Wymuszenie zmiany hasła (teraz):
+```
+chage –d 0 <username>
+```
+
+## Create, delete, and modify local groups and group memberships
+
+W celu utworzenia grupy, dodajemy w pliku **/etc/group** wpis postaci:
+
+**nazwa_grupy:hasło:gid:użytkownicy** , gdzie:
+
+nazwa_grupy – jest nazwą nowo tworzonej grupy,
+hasło – nie jest używane, pozostawione puste,
+gid – jest identyfikatorem grupy,
+użytkownicy – jest listą użytkowników należących do danej grupy.
+
+
+root:x:0:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:waldi
+tty:x:5:
+disk:x:6:
+lp:x:7:lp
+users:x:100:waldi,kacper
+nogroup:x:65534:
+ftp:x:1001:waldi,kacper
+samba:x:1002:root,waldi,krzys,slawek
+
+## Configure superuser access
+
+sudoers
