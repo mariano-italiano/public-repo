@@ -117,10 +117,18 @@ chmod 1755 plik
 [Skrypty przygotowane do przejrzenia](https://github.com/mariano-italiano/public-repo/tree/master/rhcsa/scripts)
 
 ## SHELL
+**FOR**
 ```
 for i in user1 user2 user3; do id $i; done 
 for i in `seq 17 24`; do bzip2 authlog-2021-01-$i; done
 for i in `seq 10 20`; do ip a a 10.10.$i.10/24 dev ens33; done
 for i in `seq 1 10`; do lvcreate vg_group -n lv_partition$i -L 128m; done
 for i in `seq 2 10`; do echo -e "lv_$i -fstype=ext4 :/dev/vg_group/lv_$i" >>/etc/auto.konfig; done
+for RPM in `rpm -qa | sort | uniq` ; do rpm -qi $RPM ; done | egrep -i "^Name|^Summary" > RPM-summary.txt
+```
+**WHILE**
+```
+X=0 ; while [ true ] ; do echo $X ; X=$((X+1)) ; done | head
+X=0 ; while [ $X -le 5 ] ; do echo $((X++)) ; done
+X=0 ; until [ $X -eq 5 ] ; do echo $((++X)) ; done
 ```
