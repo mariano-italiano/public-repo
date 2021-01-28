@@ -1,10 +1,10 @@
 #!/bin/bash
 
-#	zmienne ¶rodowiskowe echo $HOME;
+#	zmienne środowiskowe echo $HOME;
 
 echo $USER; echo $HOSTNAME;
 
-export set ZMIENNA_NOWA="nowa zmienna ¶rodowiskowa"; echo $ZMIENNA_NOWA;
+export set ZMIENNA_NOWA="nowa zmienna środowiskowa"; echo $ZMIENNA_NOWA;
 
 #	zmienne tablicowe
 tablica1=(1 2 3 4);
