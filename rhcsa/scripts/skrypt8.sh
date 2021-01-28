@@ -1,7 +1,5 @@
 #!/bin/bash
-#	instrukcja case - przydatne np. podczas wykonywania skryptów
-
-#	z parametrami
+#	instrukcja case - przydatne np. podczas wykonywania skryptów	z parametrami
 case "$1" in
 
 "--nowy-plik") {
