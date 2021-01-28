@@ -7,13 +7,13 @@ do
 
 case $zmienna in
 
-"a") echo "wybrałe¶ a";;
-"b") echo "wybrałe¶ b";;
+"a") echo "wybrałes a";;
+"b") echo "wybrałes b";;
 
-"c") echo "wybrałe¶ c";;
+"c") echo "wybrałes c";;
 "wyjscie") exit;;
 
-*) echo "nic nie wybrałe¶";;
+*) echo "nic nie wybrałes";;
 esac
 
 break
