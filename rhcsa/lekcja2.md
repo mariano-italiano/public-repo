@@ -323,4 +323,41 @@ samba:x:1002:root,waldi,krzys,slawek
 
 ## Configure superuser access
 
-sudoers
+Dodanie usera do grupy wheel
+```
+usermod -aG wheel username
+```
+Testing sudo:
+```
+sudo whoami
+```
+Do edycji pliku sudoers służy polecenie:
+```
+visudo
+```
+Domyślna konfiguracja znajdująca się w pliku /etc/sudoers.
+Liniki odnoszące się do uprawnień użytkowników:
+```
+user ALL=(ALL:ALL) ALL
+```
+Nazwa user odnosi się do użytkownika, którego reguły będą dotyczyć. 
+Pierwsze ALL odnosi się do hosta, którego reguła dotyczy
+Następne ALL (pierwsze w nawiasie) odnosi się do możliwości wykonywania poleceń przez użytkownika i kolejne do grupy.
+Ostatnie all odnosi się do poleceń – w tym przypadku użytkownik może wszystko wykonywać bez użycia polecenia sudo. 
+
+Ostatnie dwie linijki są podobne do uprawnień użytkownika, odnoszą się jednak do grup użytkowników i są poprzedzone %.:
+```
+%admin ALL=(ALL) ALL
+```
+Aby zalogować sie na roota wykonujemu:
+```
+sudo su
+```
+Aby odłożyć zaś wymuszenie wpisania hasła możemy posłużyć się poleceniem:
+```
+sudo -v
+```
+By sprawdzić, jakie mamy uprawnienia w chwili obecnej, możemy wydać polecenie:
+```
+sudo -l
+```
