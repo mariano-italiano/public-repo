@@ -3,9 +3,9 @@
 clear
 # cytowanie
 echo "to jest katalog domowy: $HOME";
-# znak maskuj±cy \
+# znak maskujący \
 
-echo "to jest przyklad dziłania znaku maskuj±cego: \$HOME";
+echo "to jest przyklad dziłania znaku maskującego: \$HOME";
 
 #	łańcuch tekstowy - brak interpretacji znaków specjalnych echo '$HOME';
 
