@@ -27,7 +27,7 @@ echo "wszystkie argumenty: $@";
 
 echo "kod powrotu ostatnio wydanego polecenia: $?";
 
-#	generujemy bł±d lssfsdfsdff 2> /dev/null
-echo "Czy jest bł±d (1)? : $?";
+#	generujemy błąd lssfsdfsdff 2> /dev/null
+echo "Czy jest błąd (1)? : $?";
 
 #	PID bież±cej powłoki: $$ echo "PID powłoki: $$";
