@@ -2,6 +2,18 @@
 
 Zamieszczam materiały i komendy (polecenia) które były użyte podczas zajęć.
 
+[Use input-output redirection (>, >>, |, 2>, etc.)](#Use-input-output-redirection-(>,->>,-|,-2>,-etc.))<br />
+[Use grep and regular expressions to analyze text](#Use-grep-and-regular-expressions-to-analyze-text)<br />
+[Access remote systems using SSH](#Access-remote-systems-using- SSH)<br />
+[Create and edit text files](#Create-and-edit-text-files)<br />
+[Create, delete, copy, and move files and directories](#Create,-delete,-copy,-and-move-files-and-directories)<br />
+[Create hard and soft links](#Create-hard-and-soft-links)<br />
+
+Additional topics
+
+[Use version control tools](#Use-version-control-tools)<br />
+[Run commands on many systems simultaneously](#Run-commands-on-many-systems-simultaneously)
+
 ## Use input-output redirection (>, >>, |, 2>, etc.)
 
 ```
