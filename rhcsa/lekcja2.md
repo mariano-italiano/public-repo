@@ -2,6 +2,15 @@
 
 Zamieszczam materiały i komendy (polecenia) które były użyte podczas zajęć.
 
+[Archive, compress, unpack, and uncompress files using tar, star, gzip, and bzip2](#Archive,-compress,-unpack,-and-uncompress-files-using-tar,-star,-gzip,-and bzip2)<br />
+[Locate, read, and use system documentation including man, info, and files in /usr/share/doc](#Locate,-read,-and-use-system-documentation-including-man,-info,-and-files-in-/usr/share/doc)<br />
+[List, set, and change standard ugo/rwx permissions](#List,-set,-and-change-standard-ugo/rwx-permissions)<br />
+[Scripts and automation](#)<br />
+[Create, delete, and modify local user accounts](#Create,-delete,-and-modify-local-user-accounts)<br />
+[Change passwords and adjust password aging for local user accounts](#Change-passwords-and-adjust-password-aging-for-local-user-accounts)<br />
+[Create, delete, and modify local groups and group memberships](#Create,-delete,-and-modify-local-groups-and-group-memberships)<br />
+[Configure superuser access](#Configure-superuser-access)<br />
+
 ## Additional Important Commands
 
 ```
