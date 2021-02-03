@@ -2,6 +2,7 @@
 
 Zamieszczam materiały i komendy (polecenia) które były użyte podczas zajęć.
 
+[Additional Important Commands](#Additional-Important-Commands)<br />
 [Archive, compress, unpack, and uncompress files using tar, star, gzip, and bzip2](#Archive,-compress,-unpack,-and-uncompress-files-using-tar,-star,-gzip,-and-bzip2)<br />
 [Locate, read, and use system documentation including man, info, and files in /usr/share/doc](#Locate,-read,-and-use-system-documentation-including-man,-info,-and-files-in-/usr/share/doc)<br />
 [List, set, and change standard ugo/rwx permissions](#List,-set,-and-change-standard-ugo/rwx-permissions)<br />
