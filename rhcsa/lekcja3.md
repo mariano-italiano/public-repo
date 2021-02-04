@@ -387,7 +387,7 @@ Domyślnie logi Journald są trzymane w `/run/log/journal` ale znikają one po r
 Aby permanentnie trzymać pliki logów Jourlnald należy to skonfigurować:
 ```
 mkdir /var/log/journal
-echo "SystemMaxUse=50M" '2 greater than symbols' /etc/systemd/journald.conf
+echo "SystemMaxUse=50M" >> /etc/systemd/journald.conf
 systemctl restart systemd-journald 
 ```
 **Note:** Ustawienie zmiennej SystemMaxUse jest wymagane ponieważ w innym przypadku 10% filesystemu gdzie trzymane są logi journala może być użyte maksymalnie przez Journald. 
@@ -407,7 +407,7 @@ Aby zarządzać maksymalną przestrzenią jaką może zająć ustawiamy wartoś�
 
 Aby zaktualizować wartość zmiennej:
 ```
-echo "SystemMaxUse=50M" `greater-than-symbol*2` /etc/systemd/journald.conf
+echo "SystemMaxUse=50M" >> /etc/systemd/journald.conf
 ```
 
 Zaaplikowanie zmiany poprzez restart usługi:
@@ -425,6 +425,16 @@ Aby wylistować które usługi są 'enabled':
 ```
 systemctl list-unit-files --type service
 ```
+
+Wylistowanie wszystkich serwisów które nie zostały poprawnie uruchomione:
+```
+systemctl list-units --failed
+```
+Wylistowanie wszystkich aktywnych serwisów:
+```
+systemctl list-units --type service --state=active
+```
+
 Aby wyświetlić szczegółowe informacje na temat konkretnego serwisu (httpd):
 ```
 systemctl status httpd
