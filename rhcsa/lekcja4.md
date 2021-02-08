@@ -77,6 +77,8 @@ w - zapisanie zmian
 Jeżeli partycje nie pokazują się w systemie po ich stworzeniu lub nie znikają po ich usunięciu wykonaj komendę: 
 ```
 partprobe
+lub
+for i in `seq 0 32`; do echo "- - -" > /sys/class/scsi_host/host$i/scan; done
 ```
 Wylistowanie wszystkich partycji:
 ```
@@ -159,7 +161,7 @@ vgs
 View the volume group: 
 ```
 vgs 
-or
+lub
 vgdisplay 
 ```
 
@@ -175,7 +177,7 @@ vg1 <- grupa wolumenowa
 Wylistowanie logicznych wolumenów: 
 ```
 lvs 
-or 
+lub 
 lvdisplay 
 ```
 
@@ -272,7 +274,10 @@ Tworzenie nowego logicznego wolumenu (pod swapa):
 ```
 lvcreate -n swap1 -L 2G vg1
 ```
-
+Tworzenie nowego logicznego wolumenu (pod swapa) z wykorzystaniem całej dostępnej przestrzeni:
+```
+lvcreate -n swap1 -l 100%FREE vg1
+```
 Tworzenie partycji swapowej:
 ```
 mkswap /dev/vg1/swap1
@@ -301,4 +306,12 @@ Aby zamontować swap permanentnie trzeba wyedytować plik /etc/fstab i skopiowa�
 Aby zamontować wszystkie partycje swapowe z pliku /etc/fstab:
 ```
 swapon -a
+```
+Tworzenie swapa z pliku:
+```
+dd if=/dev/zero of=swapfile bs=1024 count=1048576
+chmod 600 swapfile
+mkswap swapfile
+swapon swapfile
+free -h
 ```
