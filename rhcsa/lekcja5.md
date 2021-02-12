@@ -322,6 +322,21 @@ Montowanie nowego dysku:
 mount /dev/mapper/vdo1 /mnt
 ```
 
+Aby wyświetlić szczegóły na temat VDO:
+```
+vdo printConfigFile
+```
+
+Zmiana polityki zapisu na sync (z defaultowej auto):
+```
+vdo changeWritePolicy --name=vdo1 --writePolicy=sync
+```
+
+Aby usunąć urządzenie VDO:
+```
+vdo remove --name=vdo1
+```
+
 ## Manage layered storage
 
 Stratis jest rozwiązaniem do zarządzania lokalnym storagem wbudowany w RHEL8. Stratis wspiera nstępujące funkcje:
@@ -380,12 +395,12 @@ stratis pool list
 
 Tworzenie filesystemu na nowo utworzonej pooli:
 ```
-stratis fs create stratis fs1
+stratis filesystem create stratis fs1
 ```
 
 Sprzawdzenie czy filesystem stowrzył się poprawnie:
 ```
-stratis fs list strat1
+stratis filesystem list 
 ```
 
 Wylistowanie urządzeń blokowych po utworzeniu pooli:
@@ -408,29 +423,28 @@ stratis pool add-data strat1 /dev/sdd
 Sprawdzenie pooli po rozszerzeniu:
 ```
 stratis pool list
+lub
+stratis blockdev list
 ```
 
 Tworzenie snapshotu na filesystemie:
 ```
-stratis fs snapshot strat1 fs1 snapshot1
+stratis filesystem snapshot strat1 fs1 snapshot1
+stratis filesystem snapshot strat1 fs1 snapshot2
 ```
 
 Sprawdzenie czy snapshot się stworzył:
 ```
-stratis filesystem list strat1
+stratis filesystem list 
 ```
 
-Przywrócenie z snapshotu:
+**Przywrócenie z snapshotu:**
+Odmontowanie najpierw filesystemu:
 ```
 umount /stratis/strat1/fs1
 ```
 
-Tworzenie snapshotu na filesystemie:
-```
-stratis filesystem snapshot strat1 fs1 snapshot2
-```
-
-Montowanie snapshotu:
+Montowanie snapshotu - analogicznie jak montowany filesystem:
 ```
 mount /stratis/strat1/snapshot1
 ```
@@ -444,7 +458,7 @@ stratis filesystem destroy strat1 snapshot2
 
 Wylistowanie filesystemu aby sprawdzić czy usnięto:
 ```
-stratis filesystem list strat1
+stratis filesystem list 
 ```
 
 Usunięcie pooli:
