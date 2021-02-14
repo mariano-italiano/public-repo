@@ -10,7 +10,7 @@ Zamieszczam materiały i komendy (polecenia) które były użyte podczas zajęć
 [Manage tuning profiles](#Manage-tuning-profiles)<br />
 [Locate and interpret system log files and journals](#Locate-and-interpret-system-log-files-and-journals)<br />
 [Preserve system journals](#Preserve-system-journals)<br />
-[Start, stop, and check the status of network services](#Start,-stop,-and-check-the-status-of-network-services)<br />
+[Start, stop, and check the status of network services](#Start-stop-and-check-the-status-of-network-services)<br />
 [Securely transfer files between systems](#Securely-transfer-files-between-systems)<br />
 
 ## Boot, reboot, and shut down a system normally
@@ -415,7 +415,7 @@ Zaaplikowanie zmiany poprzez restart usługi:
 systemctl restart systemd-journald
 ```
 
-## Start, stop, and check the status of network services
+## Start stop and check the status of network services
 
 Aby wylistować wszystkie usługi:
 ```
