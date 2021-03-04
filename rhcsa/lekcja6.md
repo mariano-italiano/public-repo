@@ -254,7 +254,8 @@ Aby dodać nowe repozytorium w systemie z miminalną konfiguracją potrzeba stwo
 ```
 [repository]
 name=repository_name
-baseurl=repository_url
+baseurl=<repository_url>
+enable=1
 ```
 Należy zamienić repository_url z URL'em do katalogu, gdzie znajduje się repodata: 
 * W przypadku repozytoriów HTTP: http://path/to/repo​ 
