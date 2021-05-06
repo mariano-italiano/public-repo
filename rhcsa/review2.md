@@ -1,7 +1,0 @@
-1.  Wyświetl UUID wszystkich partycji i dysków na systemie (w formie drzewa również)
-2.  Stwórz nową partycję 2GB, nadaj jej typ LVM i stwórz wolumen fizyczny 2GB o nazwie "fizyczny" oraz grupę wolumenową o rozmiarze 1GB "grupa" i wolumen logiczny o rozmiarze 1GB o nazwie "test". Stwórz na niej systemplików XFS i zamontuj na /test/xfs.
-3.  Rozszerz wolumen logiczny o nazwie "test" dodając 500M, nie zapomnij o rozszerzeniu systemu plików XFS. Zamontuj zasób permanentnie tak by był montowany przy bootowaniu.
-4.  Stwórz plik o rozmiarze 1GB i zrób z niego swapa. Zamontuj zasób permanentnie tak by był montowany jako SWAP przy bootowaniu.
-5.  Usuń całą pwyższą konfigurację LVM, odmontuj zasób. Wyczyść partycję. Stwórz nowy dysk VDO o nazwie "testVdo" o rozmiarze 1GB z polityką zapisu auto. Zamontuj na /test/vdo. Wylistuj szczegółowe informacje na temat tego zasobu.
-6.  Usuń całą pwyższą konfigurację VDO, odmontuj zasób. Wyczyść partycję. Stwórz nowy dysk STRATIS o nazwie "testStratis" i filesystemie o nazwie "testFs". Zamontuj na /test/stratis. Wykonaj snapshot filesystemu o nazwie snap1. Wykonaj zmiany na filesystemie i zrób snapshot filesystemu o nazwie snap2. Sprawdź czy snapshoty są utworzone poprawnie. Zamontuj oba i sprawdź jaka jest różnica.
-7.  Stwórz prosty skrypt zapisujący czas lokalny, RTC i strefe czasową do pliku /tmp/czas.txt, zaplanuj wykonanie skryptu każdego pierwszego dnia miesiąca.
